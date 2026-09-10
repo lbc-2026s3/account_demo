@@ -5,9 +5,6 @@ var createKeccakHash=require('keccak')
 // 一个32字节的随机数（1~2^256-1）, 直接把他当成私钥
 var privateKey=Crypto.randomBytes(32);
 
-//var privateKey = new Buffer("c87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3", "hex");
-// var privateKey = new Buffer("c87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3", "hex");
-
 console.log(privateKey.toString('hex'));
 
 // 由secp256k1椭圆曲线算法先计算出公钥
@@ -20,5 +17,3 @@ pubKey = Buffer.from(pubKey);
 var address = createKeccakHash('keccak256')
                 .update(pubKey).digest().slice(-20);
 console.log("0x" + address.toString('hex'));
-
-//

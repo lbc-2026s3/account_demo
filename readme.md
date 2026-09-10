@@ -2,11 +2,7 @@
 
 ## install
 
-Node.js 18.17.1:
-```
-nvm install 18.17.1
-nvm use 18.17.1
-```
+Compatible with Node.js 18+ (tested on Node 24):
 
 ```
 npm install
