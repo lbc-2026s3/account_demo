@@ -8,14 +8,26 @@ Compatible with Node.js 18+ (tested on Node 24):
 npm install
 ```
 
-1. create eth account by random private key 
+Copy env sample and set a test private key:
 
 ```
-node create_by_raw.js 
+cp .env.example .env
 ```
 
-2. create ethereum account by random  mnemonic
+1. create eth account by random private key
 
 ```
-node create_by_mnemonic.js
+npm run create_by_raw
+```
+
+2. create ethereum account by random mnemonic
+
+```
+npm run create_by_mnemonic
+```
+
+3. encrypt / decrypt private key with keystore
+
+```
+npm run keystore_demo
 ```

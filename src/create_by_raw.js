@@ -1,6 +1,6 @@
-var Crypto = require('crypto')
-var secp256k1=require('secp256k1')
-var createKeccakHash=require('keccak')
+import Crypto from 'crypto'
+import secp256k1 from 'secp256k1'
+import createKeccakHash from 'keccak'
 
 // 一个32字节的随机数（1~2^256-1）, 直接把他当成私钥
 var privateKey=Crypto.randomBytes(32);
@@ -13,7 +13,7 @@ var pubKey = secp256k1.publicKeyCreate(privateKey, false).slice(1);
 // 将 Uint8Array 转换为 Buffer
 pubKey = Buffer.from(pubKey);
 
-// 进行keccak256 hash运算再取后40位得到
+// 进行keccak256 hash运算再取后20字节得到
 var address = createKeccakHash('keccak256')
                 .update(pubKey).digest().slice(-20);
 console.log("0x" + address.toString('hex'));
