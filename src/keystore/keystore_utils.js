@@ -4,13 +4,31 @@ import path from 'path'
 
 class KeystoreUtils {
     /**
+     * 规范化私钥：带不带 0x 均可，统一返回带 0x 的小写 hex
+     * @param {string} privateKey
+     * @returns {string}
+     */
+    static normalizePrivateKey(privateKey) {
+        if (!privateKey || typeof privateKey !== 'string') {
+            throw new Error('私钥不能为空')
+        }
+        const hex = privateKey.trim().replace(/^0x/i, '')
+        if (!/^[0-9a-fA-F]{64}$/.test(hex)) {
+            throw new Error('私钥必须是 32 字节 hex（64 个字符，0x 可选）')
+        }
+        return '0x' + hex.toLowerCase()
+    }
+
+    /**
      * 加密私钥并生成 KeyStore 文件
-     * @param {string} privateKey - 私钥（带0x前缀）
+     * @param {string} privateKey - 私钥（0x 可选）
      * @param {string} password - 密码
      * @returns {Object} KeyStore 对象
      */
     static async encryptPrivateKey(privateKey, password) {
         try {
+            const normalized = this.normalizePrivateKey(privateKey)
+
             // 1. 生成随机 salt
             const salt = crypto.randomBytes(32)
             
@@ -27,7 +45,7 @@ class KeystoreUtils {
             // 4. 加密私钥
             // 使用派生密钥的前16字节作为AES-128的密钥
             const cipher = crypto.createCipheriv('aes-128-ctr', derivedKey.slice(0, 16), iv)
-            const privateKeyBuffer = Buffer.from(privateKey.slice(2), 'hex')
+            const privateKeyBuffer = Buffer.from(normalized.slice(2), 'hex')
             const ciphertext = Buffer.concat([
                 cipher.update(privateKeyBuffer),
                 cipher.final()

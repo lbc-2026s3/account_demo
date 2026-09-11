@@ -7,7 +7,7 @@
   "scripts": {
     "create_by_raw": "node src/create_by_raw.js",
     "create_by_mnemonic": "node src/create_by_mnemonic.js",
-    "keystore_demo": "node src/keystore_demo.js"
+    "keystore_demo": "node src/keystore/keystore_demo.js"
   },
   "author": "",
   "license": "ISC",

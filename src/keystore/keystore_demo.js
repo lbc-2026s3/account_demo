@@ -7,10 +7,7 @@ dotenv.config()
 async function demo() {
     try {
         // 1. 从环境变量获取私钥
-        const privateKey = process.env.PRIVATE_KEY
-        if (!privateKey) {
-            throw new Error('请在 .env 文件中设置 PRIVATE_KEY')
-        }
+        const privateKey = KeystoreUtils.normalizePrivateKey(process.env.PRIVATE_KEY)
         console.log('原始私钥:', privateKey)
 
         // 2. 设置密码和文件路径
