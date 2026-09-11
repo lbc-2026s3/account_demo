@@ -31,3 +31,11 @@ npm run create_by_mnemonic
 ```
 npm run keystore_demo
 ```
+
+4. send tx with keystore (需要先启动 anvil，并生成兼容的 keystore)
+
+```
+anvil
+npm run keystore_demo
+npm run build_tx_keystore
+```

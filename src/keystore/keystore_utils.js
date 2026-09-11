@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import fs from 'fs/promises'
 import path from 'path'
+import createKeccakHash from 'keccak'
 
 class KeystoreUtils {
     /**
@@ -17,6 +18,11 @@ class KeystoreUtils {
             throw new Error('私钥必须是 32 字节 hex（64 个字符，0x 可选）')
         }
         return '0x' + hex.toLowerCase()
+    }
+
+    /** Ethereum KeyStore MAC 使用 keccak256（不是 NIST sha3-256） */
+    static keccak256(buffer) {
+        return createKeccakHash('keccak256').update(buffer).digest()
     }
 
     /**
@@ -51,10 +57,8 @@ class KeystoreUtils {
                 cipher.final()
             ])
             
-            // 5. 计算 MAC
-            const mac = crypto.createHash('sha3-256')
-                .update(Buffer.concat([derivedKey.slice(16, 32), ciphertext]))
-                .digest()
+            // 5. 计算 MAC（Web3 Secret Storage：keccak256）
+            const mac = this.keccak256(Buffer.concat([derivedKey.slice(16, 32), ciphertext]))
             
             // 6. 返回 KeyStore 对象
             return {
@@ -108,10 +112,10 @@ class KeystoreUtils {
                 }
             )
             
-            // 3. 验证 MAC
-            const calculatedMac = crypto.createHash('sha3-256')
-                .update(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(ciphertext, 'hex')]))
-                .digest()
+            // 3. 验证 MAC（keccak256）
+            const calculatedMac = this.keccak256(
+                Buffer.concat([derivedKey.slice(16, 32), Buffer.from(ciphertext, 'hex')])
+            )
             
             if (calculatedMac.toString('hex') !== mac) {
                 throw new Error('密码错误或 KeyStore 文件已损坏')

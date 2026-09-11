@@ -7,7 +7,8 @@
   "scripts": {
     "create_by_raw": "node src/create_by_raw.js",
     "create_by_mnemonic": "node src/create_by_mnemonic.js",
-    "keystore_demo": "node src/keystore/keystore_demo.js"
+    "keystore_demo": "node src/keystore/keystore_demo.js",
+    "build_tx_keystore": "tsx src/tx/build_tx_keystore.ts"
   },
   "author": "",
   "license": "ISC",
@@ -17,9 +18,12 @@
   "dependencies": {
     "@ethereumjs/util": "^9.1.0",
     "@ethereumjs/wallet": "^2.0.4",
+    "@ethersproject/wallet": "^5.8.0",
     "bip39": "^3.1.0",
     "dotenv": "^16.5.0",
     "keccak": "^3.0.4",
-    "secp256k1": "^5.0.1"
+    "secp256k1": "^5.0.1",
+    "tsx": "^4.19.0",
+    "viem": "^2.30.6"
   }
 }
