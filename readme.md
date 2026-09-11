@@ -39,3 +39,15 @@ anvil
 npm run keystore_demo
 npm run build_tx_keystore
 ```
+
+5. SSS 分片演示发交易（Sepolia）
+
+```
+npm run build_tx_mpc_sss
+```
+
+6. TSS 加法分片协作签名发交易（Sepolia，教学版）
+
+```
+npm run build_tx_mpc_tss
+```

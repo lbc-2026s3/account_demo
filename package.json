@@ -8,7 +8,9 @@
     "create_by_raw": "node src/create_by_raw.js",
     "create_by_mnemonic": "node src/create_by_mnemonic.js",
     "keystore_demo": "node src/keystore/keystore_demo.js",
-    "build_tx_keystore": "tsx src/tx/build_tx_keystore.ts"
+    "build_tx_keystore": "tsx src/tx/build_tx_keystore.ts",
+    "build_tx_mpc_sss": "tsx src/tx/build_tx_mpc_sss.js",
+    "build_tx_mpc_tss": "tsx src/tx/build_tx_mpc_tss.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +25,7 @@
     "dotenv": "^16.5.0",
     "keccak": "^3.0.4",
     "secp256k1": "^5.0.1",
+    "shamirs-secret-sharing": "^2.0.1",
     "tsx": "^4.19.0",
     "viem": "^2.30.6"
   }
