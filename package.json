@@ -11,7 +11,8 @@
     "build_tx_keystore": "tsx src/tx/build_tx_keystore.ts",
     "build_tx_raw": "tsx src/tx/build_tx_raw.ts",
     "build_tx_mpc_sss": "tsx src/tx/build_tx_mpc_sss.js",
-    "build_tx_mpc_tss": "tsx src/tx/build_tx_mpc_tss.js"
+    "build_tx_mpc_tss": "tsx src/tx/build_tx_mpc_tss.js",
+    "sign_verify": "tsx src/sign/sign_verify.ts"
   },
   "author": "",
   "license": "ISC",
